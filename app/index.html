@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="cbsChat">
+<head>
+    <meta charset="UTF-8">
+    <!-- build:css css/vendor.min.css -->
+    <link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="libs/font-awesome/css/font-awesome.min.css">
+    <!-- endbuild -->
+    
+    <!-- build:css css/main.min.css -->
+    <link rel="stylesheet" href="css/main.css">
+    <!-- endbuild -->
+    <title>Chat</title>
+</head>
+<body>
+   <section class="chat-page" ng-controller="chatCtrl as chat">
+       <div class="chat-window">
+           <div class="chat-header">
+               <div class="chat-header__author">
+                   {{chat.author.displayName}}
+               </div>
+               <div class="chat-header__btns">
+                   <button ng-if="!chat.author" class="btn btn-green" ng-click="chat.login()">Login</button>
+                   <button ng-if="chat.author" class="btn btn-red" ng-click="chat.logout()">Logout</button> 
+               </div>
+           </div>
+           <div class="chat-body">
+               <ul class="messages">
+                   <li class="message" ng-class="{ ' message--mine': m.authorId == chat.author.uid }" ng-repeat="m in chat.shownMessages">
+                       <img class="message__photo" ng-src="{{m.authorPhoto}}" alt="">
+                       <span class="message__author">{{m.authorName}}</span>
+                       <button ng-class="{'message--delete': m.authorId == chat.author.uid }" class="message--delete-hide" ng-click="chat.deleteThis(m)" ><i class="fa fa-times"></i></button>
+                       <div class="message__text">
+                        {{m.text}}
+                       </div>
+                       <div class="message__date">{{m.timestamp|date:'dd-MMM-yyyy : HH-mm-ss'}}</div>
+                       <!--<div class="message__date">{{m.date | date:'dd-MMM-yyyy : HH-ss'}}</div>-->
+                   </li>    
+               </ul>
+           </div>
+           <div class="chat-footer">
+               <textarea my-enter="chat.sendMessage()" rows="3" ng-model="chat.newMessage"></textarea>
+               <button class="btn btn-green btn-send" ng-click="chat.sendMessage()">
+                   <img src="../img/send.svg" alt="">
+                   <!--<i class="fa fa-paper-plane" aria-hidden="true"></i>-->
+               </button>
+           </div>
+       </div>
+   </section>
+    <!-- build:js js/vendor.min.js -->
+        <script src="libs/angular/angular.min.js"></script>
+        <script src="libs/firebase/firebase.js"></script>
+        <script src="libs/angularfire/dist/angularfire.min.js"></script>
+        <script src="libs/angular-ui-router/release/angular-ui-router.min.js"></script>
+        <script src="libs/jquery/dist/jquery.min.js"></script>
+        <script src="libs/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- endbuild -->
+    
+    <!-- build:js js/main.min.js -->
+        <script src="js/app.js"></script>
+        <script src="js/services/chat.service.js"></script>
+        <script src="js/controllers/chat.controller.js"></script>
+        <script src="js/directives/enter-sender.directive.js"></script>
+    <!-- endbuild --> 
+</body>
+</html>

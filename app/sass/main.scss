@@ -1,0 +1,98 @@
+@import "vars";
+body {
+    font-family: sans-serif;
+}
+.chat-page {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.chat-window {
+    width: 70%;
+    box-shadow: 0 5px 30px -10px #000;
+    border-radius: 10px;
+    overflow: hidden
+}
+.chat-header {
+    display: flex;
+    justify-content: space-between;
+}
+.chat-header, .chat-footer {
+    text-align: center;
+    padding: 20px;
+    box-shadow: 0 5px 20px -5px #000;
+    position: relative;
+}
+.chat-header__author {
+    font-weight: 700;
+    font-size: 18px;
+}
+.chat-body {
+    height: 400px;
+    overflow-y: scroll;
+}
+.messages {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+.message {
+    border-color: $light;
+    background-color: #d4d4d4;
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #eee;
+    width: 70%;
+    float: left;
+}
+.message--mine {
+    float: right;
+    color: #fff;
+    background-color: $mainColor;
+}
+
+.message__photo {
+    width: 50px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    margin-right: 10px;
+}
+.message__author {
+    font-size: 18px;
+    font-weight: 500;
+}
+.message__text {
+    margin: 0.5em auto;
+    font-size: 15px;
+}
+.message__date {
+    font-size: 11px;
+}
+.message--delete-hide {
+    display: none;
+}
+.message--delete {
+    display: block;
+    float: right;
+    color: #fff;
+    font-size: 17px;
+    outline: none;
+    border: none;
+    background-color: transparent;
+    &:hover {
+        color: red;
+    }
+}
+
+.chat-footer {
+    textarea {
+        width: 80%;
+        padding: 10px;
+        border: none;
+        box-shadow: 0 0 10px -5px #000;
+        border-radius: 10px;
+        outline: none;
+    }    
+}

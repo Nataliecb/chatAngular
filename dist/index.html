@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="cbsChat">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/vendor.min.css">
+    
+    <link rel="stylesheet" href="css/main.min.css">
+    <title>Chat</title>
+</head>
+<body>
+   <section class="chat-page" ng-controller="chatCtrl as chat">
+       <div class="chat-window">
+           <div class="chat-header">
+               <div class="chat-header__author">
+                   {{chat.author.displayName}}
+               </div>
+               <div class="chat-header__btns">
+                   <button ng-if="!chat.author" class="btn btn-green" ng-click="chat.login()">Login</button>
+                   <button ng-if="chat.author" class="btn btn-red" ng-click="chat.logout()">Logout</button> 
+               </div>
+           </div>
+           <div class="chat-body">
+               <ul class="messages">
+                   <li class="message" ng-class="{ ' message--mine': m.authorId == chat.author.uid }" ng-repeat="m in chat.shownMessages">
+                       <img class="message__photo" ng-src="{{m.authorPhoto}}" alt="">
+                       <span class="message__author">{{m.authorName}}</span>
+                       <button ng-class="{'message--delete': m.authorId == chat.author.uid }" class="message--delete-hide" ng-click="chat.deleteThis(m)" ><i class="fa fa-times"></i></button>
+                       <div class="message__text">
+                        {{m.text}}
+                       </div>
+                       <div class="message__date">{{m.timestamp|date:'dd-MMM-yyyy : HH-mm-ss'}}</div>
+                       <!--<div class="message__date">{{m.date | date:'dd-MMM-yyyy : HH-ss'}}</div>-->
+                   </li>    
+               </ul>
+           </div>
+           <div class="chat-footer">
+               <textarea my-enter="chat.sendMessage()" rows="3" ng-model="chat.newMessage"></textarea>
+               <button class="btn btn-green btn-send" ng-click="chat.sendMessage()">
+                   <img src="../img/send.svg" alt="">
+                   <!--<i class="fa fa-paper-plane" aria-hidden="true"></i>-->
+               </button>
+           </div>
+       </div>
+   </section>
+    <script src="js/vendor.min.js"></script>
+    
+    <script src="js/main.min.js"></script>
+</body>
+</html>
